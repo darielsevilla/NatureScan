@@ -39,31 +39,33 @@ class AnimalNetwork:
         return False
 
     def createNetwork(self):
-        capa = tf.keras.layers.Dense(units=1, input_shape=[1])
+        
         #Dense -> que todas las neuronas del layer anterior estan conectadas a todas las del layer actual
         #Flatten -> cque convierte data de 2D (como una foto de mxn dimensiones) en un arreglo 1D, osea q toda el valor de cada pixel y lo pone en un arreglo que puede usar de input para la red neuronal
         self.model = tf.keras.Sequential([
-            #toma imagenes de 224x224 de 3 colores primos, y las pasa por 70 filtros de 3x3 aleatorios
-            tf.keras.layers.Conv2D(100, (3,3), activation = 'relu', input_shape=(64,64,3)),
+           
+            tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(64,64,3)),
+            
             tf.keras.layers.MaxPooling2D(2,2),
-            tf.keras.layers.Conv2D(100, (3,3), activation = 'relu'),
+            tf.keras.layers.Conv2D(64, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1), padding = 'same'),
             tf.keras.layers.MaxPooling2D(2,2),
-            tf.keras.layers.Conv2D(100, (3,3), activation = 'relu'),
+            tf.keras.layers.Conv2D(128, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1),padding = 'same'),
             tf.keras.layers.MaxPooling2D(2,2),
-            tf.keras.layers.Conv2D(100, (3,3), activation = 'relu'),
+            tf.keras.layers.Conv2D(256, (3,3), activation=tf.nn.swish),
             tf.keras.layers.MaxPooling2D(2,2),
-            tf.keras.layers.Flatten(),
+            tf.keras.layers.GlobalAveragePooling2D(),
+            tf.keras.layers.Dense(300, activation=tf.nn.swish),
             tf.keras.layers.Dropout(0.5),
-            tf.keras.layers.Dense(300, activation='relu'),
-            tf.keras.layers.Dense(300, activation='relu'),
-            tf.keras.layers.Dense(300, activation='relu'),
-            tf.keras.layers.Dense(300, activation='relu'),
+            tf.keras.layers.Dense(300, activation=tf.nn.swish),
+            tf.keras.layers.Dropout(0.3),
+            tf.keras.layers.Dense(500, activation=tf.nn.swish),
+            #tf.keras.layers.Dense(500, activation='relu'),
             tf.keras.layers.Dense(10, activation='softmax')
             ])
         
         #compilacion con funciones de perdida, optimizador y metrica de accuracy
         self.model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
-
+        
         #modificaciones a las imagenes
         #modifiers = tf.keras.preprocessing.image.ImageDataGenerator(rescale = 1/255)
 
@@ -121,7 +123,7 @@ class AnimalNetwork:
     
     def classifyTestDeeplake(self):
         # Get a batch of test images and labels
-        for x_batch, y_batch in self.testset.take(5):  # Taking only 5 samples for testing
+        for x_batch, y_batch in self.testset.take(10):  # Taking only 5 samples for testing
          
             # Normalize image
             x_batch = x_batch
