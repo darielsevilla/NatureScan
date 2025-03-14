@@ -43,48 +43,40 @@ class AnimalNetwork:
         #Dense -> que todas las neuronas del layer anterior estan conectadas a todas las del layer actual
         #Flatten -> cque convierte data de 2D (como una foto de mxn dimensiones) en un arreglo 1D, osea q toda el valor de cada pixel y lo pone en un arreglo que puede usar de input para la red neuronal
         self.model = tf.keras.Sequential([
-           
+          
             tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(64,64,3)),
-            
             tf.keras.layers.MaxPooling2D(2,2),
             tf.keras.layers.Conv2D(64, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1), padding = 'same'),
             tf.keras.layers.MaxPooling2D(2,2),
             tf.keras.layers.Conv2D(128, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1),padding = 'same'),
             tf.keras.layers.MaxPooling2D(2,2),
-            tf.keras.layers.Conv2D(256, (3,3), activation=tf.nn.swish),
+            tf.keras.layers.Conv2D(512, (3,3), activation=tf.nn.swish),
             tf.keras.layers.MaxPooling2D(2,2),
+            tf.keras.layers.LeakyReLU(alpha=0.1),
+            tf.keras.layers.SpatialDropout2D(0.2),
             tf.keras.layers.GlobalAveragePooling2D(),
-            tf.keras.layers.Dense(300, activation=tf.nn.swish),
+            tf.keras.layers.Dense(256, activation=tf.nn.swish),
             tf.keras.layers.Dropout(0.5),
-            tf.keras.layers.Dense(300, activation=tf.nn.swish),
+            tf.keras.layers.Dense(256, activation=tf.nn.swish),
             tf.keras.layers.Dropout(0.3),
-            tf.keras.layers.Dense(500, activation=tf.nn.swish),
+            tf.keras.layers.Dense(512, activation=tf.nn.swish),
+          
             #tf.keras.layers.Dense(500, activation='relu'),
             tf.keras.layers.Dense(10, activation='softmax')
             ])
         
         #compilacion con funciones de perdida, optimizador y metrica de accuracy
-        self.model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+        self.model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.Adam(learning_rate=0.0005), metrics=['accuracy'])
         
         #modificaciones a las imagenes
         #modifiers = tf.keras.preprocessing.image.ImageDataGenerator(rescale = 1/255)
 
-        #training = modifiers.flow_from_directory(
-        #    self.dataset,
-        #    target_size = (224,224),
-        #    batch_size = 32,
-        #    class_mode = 'categorical'
-        #)
+        
 
-        #testing = modifiers.flow_from_directory(
-        #    self.test_dir,
-        #    target_size = (224,224),
-        #    batch_size = 32,
-        #    class_mode = 'categorical'
-        #)
+        
         history = self.model.fit(
             self.dataset,
-            epochs = 35,
+            epochs = 40,      
             callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=2, verbose=1)]
         ) 
         return True
