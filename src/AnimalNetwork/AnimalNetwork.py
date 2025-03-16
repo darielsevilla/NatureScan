@@ -79,37 +79,6 @@ class AnimalNetwork:
             callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=2, verbose=1)]
         ) 
         return True
-
-    
-    # def classifyTest(self):
-    #     image_paths = []
-    #     for root, dirs, files in os.walk(self.test_dir):
-    #         for file in files:
-    #             if file.endswith(('.png', '.jpg', '.jpeg')): 
-    #                 image_paths.append(os.path.join(root, file))
-        
-    #     image_paths = image_paths[:5]
-
-    #     for img_path in image_paths:
-            
-    #         img = tf.keras.preprocessing.image.load_img(img_path, target_size=(224, 224))  # Load the image
-    #         img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array
-    #         img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-    #         img_array = img_array / 255.0  # Normalize image
-            
-    #         # Make a prediction
-    #         predictions = self.model.predict(img_array)
-            
-    #         # Get the predicted class
-    #         predicted_class = np.argmax(predictions, axis=1)
-            
-    #         # Retrieve the class labels from the model
-    #         class_labels = list(self.model.class_indices.keys())  # Retrieve the class labels
-            
-    #         # Print the image path and predicted class label
-    #         print(f"Image: {img_path}")
-    #         print(f"Predicted class: {class_labels[predicted_class[0]]}")
-    #         print("-" * 50)
     
     def classifyTestDeeplake(self):
         # Get a batch of test images and labels
@@ -129,7 +98,7 @@ class AnimalNetwork:
 
     def uploadImage(self):
         root = tk.Tk()
-        root.withdraw()
+        root.withdraw() #esconde la ventana de Tkinter
         
         img_path = filedialog.askopenfilename(
             title="Select an image",
@@ -137,15 +106,15 @@ class AnimalNetwork:
         )
 
         if img_path:
-            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Load the image and resize it
-            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array       
-            img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension (from 3D to 4D)
-            img_array = img_array / 255.0 # Normalize image (from 0 to 1)
+            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Prepocesamiento de Imagen - Carga la imagen y la redimensiona
+            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convierte la imagen a un array       
+            img_array = np.expand_dims(img_array, axis=0)  # expande la dimensión del batch (de 3D a 4D)
+            img_array = img_array / 255.0 # Normaliza la imagen (de 0 a 1) para hacer la predicción
         
-            predictions = self.model.predict(img_array)  # make prediction
-            predicted_class = np.argmax(predictions, axis=1) # get class index 
+            predictions = self.model.predict(img_array)  # hace la predicción
+            predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
         
-            # class definitions
+            # definimos el nombre de los animales 
             class_labels = ['lynx', 'guinea pig', 'jaguar', 'hamster', 'cat', 'cheetah',
                             'coyote', 'chimpanzee', 'wolf', 'orangutan']
         
