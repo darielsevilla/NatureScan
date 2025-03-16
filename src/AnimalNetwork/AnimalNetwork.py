@@ -72,9 +72,6 @@ class AnimalNetwork:
         
         #modificaciones a las imagenes
         #modifiers = tf.keras.preprocessing.image.ImageDataGenerator(rescale = 1/255)
-
-        
-
         
         history = self.model.fit(
             self.dataset,
@@ -84,36 +81,35 @@ class AnimalNetwork:
         return True
 
     
-    
-    def classifyTest(self):
-        image_paths = []
-        for root, dirs, files in os.walk(self.test_dir):
-            for file in files:
-                if file.endswith(('.png', '.jpg', '.jpeg')): 
-                    image_paths.append(os.path.join(root, file))
+    # def classifyTest(self):
+    #     image_paths = []
+    #     for root, dirs, files in os.walk(self.test_dir):
+    #         for file in files:
+    #             if file.endswith(('.png', '.jpg', '.jpeg')): 
+    #                 image_paths.append(os.path.join(root, file))
         
-        image_paths = image_paths[:5]
+    #     image_paths = image_paths[:5]
 
-        for img_path in image_paths:
+    #     for img_path in image_paths:
             
-            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(224, 224))  # Load the image
-            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array
-            img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-            img_array = img_array / 255.0  # Normalize image
+    #         img = tf.keras.preprocessing.image.load_img(img_path, target_size=(224, 224))  # Load the image
+    #         img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array
+    #         img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
+    #         img_array = img_array / 255.0  # Normalize image
             
-            # Make a prediction
-            predictions = self.model.predict(img_array)
+    #         # Make a prediction
+    #         predictions = self.model.predict(img_array)
             
-            # Get the predicted class
-            predicted_class = np.argmax(predictions, axis=1)
+    #         # Get the predicted class
+    #         predicted_class = np.argmax(predictions, axis=1)
             
-            # Retrieve the class labels from the model
-            class_labels = list(self.model.class_indices.keys())  # Retrieve the class labels
+    #         # Retrieve the class labels from the model
+    #         class_labels = list(self.model.class_indices.keys())  # Retrieve the class labels
             
-            # Print the image path and predicted class label
-            print(f"Image: {img_path}")
-            print(f"Predicted class: {class_labels[predicted_class[0]]}")
-            print("-" * 50)
+    #         # Print the image path and predicted class label
+    #         print(f"Image: {img_path}")
+    #         print(f"Predicted class: {class_labels[predicted_class[0]]}")
+    #         print("-" * 50)
     
     def classifyTestDeeplake(self):
         # Get a batch of test images and labels
@@ -128,7 +124,7 @@ class AnimalNetwork:
             predictions = self.model.predict(x_batch)
             predicted_class = np.argmax(predictions, axis=1)
 
-            print(f"Predicted Class: {predicted_class[0]}")
+            print(f"Predicted Animal: {predicted_class[0]}")
             print("-" * 50)
 
     def uploadImage(self):
@@ -136,8 +132,8 @@ class AnimalNetwork:
         root.withdraw()
         
         img_path = filedialog.askopenfilename(
-            title="Selecciona una imagen",
-            filetypes=[("Archivos de imagen", "*.png;*.jpg;*.jpeg")]
+            title="Select an image",
+            filetypes=[("Image files", "*.png;*.jpg;*.jpeg")]
         )
 
         if img_path:
@@ -150,13 +146,12 @@ class AnimalNetwork:
             predicted_class = np.argmax(predictions, axis=1) # get class index 
         
             # class definitions
-            class_labels = ['lynx', 'guinea pig', 'jaguar', 'cat', 'hamster', 'cheetah',
+            class_labels = ['lynx', 'guinea pig', 'jaguar', 'hamster', 'cat', 'cheetah',
                             'coyote', 'chimpanzee', 'wolf', 'orangutan']
         
-            print(f"Imagen seleccionada: {img_path}")
-            print(f"Clase predicha: {class_labels[predicted_class[0]]}")
+            print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
             print("-" * 50)
         else:
-            print("No se seleccionó ninguna imagen.")
+            print("No image selected.")
 
         
