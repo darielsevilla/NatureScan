@@ -2,6 +2,8 @@ import tensorflow as tf
 import numpy as np
 import os
 import deeplake
+import tkinter as tk
+from tkinter import filedialog
 
 class AnimalNetwork:
     def __init__(self):
@@ -128,3 +130,33 @@ class AnimalNetwork:
 
             print(f"Predicted Class: {predicted_class[0]}")
             print("-" * 50)
+
+    def uploadImage(self):
+        root = tk.Tk()
+        root.withdraw()
+        
+        img_path = filedialog.askopenfilename(
+            title="Selecciona una imagen",
+            filetypes=[("Archivos de imagen", "*.png;*.jpg;*.jpeg")]
+        )
+
+        if img_path:
+            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Load the image and resize it
+            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array       
+            img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension (from 3D to 4D)
+            img_array = img_array / 255.0 # Normalize image (from 0 to 1)
+        
+            predictions = self.model.predict(img_array)  # make prediction
+            predicted_class = np.argmax(predictions, axis=1) # get class index 
+        
+            # class definitions
+            class_labels = ['lynx', 'guinea pig', 'jaguar', 'cat', 'hamster', 'cheetah',
+                            'coyote', 'chimpanzee', 'wolf', 'orangutan']
+        
+            print(f"Imagen seleccionada: {img_path}")
+            print(f"Clase predicha: {class_labels[predicted_class[0]]}")
+            print("-" * 50)
+        else:
+            print("No se seleccionó ninguna imagen.")
+
+        
