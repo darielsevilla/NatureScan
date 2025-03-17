@@ -3,6 +3,9 @@ import numpy as np
 import os
 import deeplake
 import tkinter as tk
+from pathlib import Path
+import sys
+from tensorflow.keras.layers import LeakyReLU
 from tkinter import filedialog
 
 class AnimalNetwork:
@@ -37,8 +40,31 @@ class AnimalNetwork:
         ))
         print("Test Dataset: ")
         print(self.testset)
-    def loadNetwork(self):
-        return False
+
+    def loadNetwork(self): #le deseo la muerte a esta libreria basura que nunca agarra donde quiero
+        base_dir = Path(os.getcwd()) 
+        save_path = base_dir / "SavedFiles" / "model.h5"
+
+        print(f"Looking for model at: {save_path}")
+
+        if not save_path.exists():
+            print(f"Model file not found at {save_path}, creating new network...")
+            self.createNetwork()
+            return False
+
+        try:
+            self.model = tf.keras.models.load_model(save_path, 
+            custom_objects={
+                "LeakyReLU": LeakyReLU,
+                "swish": tf.nn.swish
+            })            
+            print("Network loaded successfully")
+            return True
+        except Exception as e:
+            print(f"Error loading network: {e}")
+            print("Creating new network...")
+            self.createNetwork()
+            return False
 
     def createNetwork(self):
         
@@ -77,7 +103,13 @@ class AnimalNetwork:
             self.dataset,
             epochs = 40,      
             callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=2, verbose=1)]
-        ) 
+        )
+
+        #guardado de la red
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        save_path = os.path.join(base_dir, "SavedFiles", "mi_modelo.h5")
+        self.model.save(save_path)
+        print("Network saved")
         return True
     
     def classifyTestDeeplake(self):
@@ -102,7 +134,7 @@ class AnimalNetwork:
         
         img_path = filedialog.askopenfilename(
             title="Select an image",
-            filetypes=[("Image files", "*.png;*.jpg;*.jpeg")]
+            filetypes=[("Image files", ".png;.jpg;*.jpeg")]
         )
 
         if img_path:
@@ -122,5 +154,3 @@ class AnimalNetwork:
             print("-" * 50)
         else:
             print("No image selected.")
-
-        
