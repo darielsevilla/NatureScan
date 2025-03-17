@@ -115,8 +115,8 @@ class AnimalNetwork:
             predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
         
             # definimos el nombre de los animales 
-            class_labels = ['lynx', 'guinea pig', 'jaguar', 'hamster', 'cat', 'cheetah',
-                            'coyote', 'chimpanzee', 'wolf', 'orangutan']
+            class_labels = ['lynx', 'wolf', 'jaguar', 'hamster', 'cat', 'cheetah',
+                            'coyote', 'chimpanzee', 'guinea pig', 'orangutan']
         
             print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
             print("-" * 50)
