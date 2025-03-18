@@ -2,12 +2,18 @@ import tensorflow as tf
 import numpy as np
 import os
 import deeplake
+import tkinter as tk
+from pathlib import Path
+import sys
+from tensorflow.keras.layers import LeakyReLU
+from tkinter import filedialog
+from tkinter import messagebox
 
 class AnimalNetwork:
     def __init__(self):
         
         #enlaces de dataset para entrenar y probar
-        dir =  '/kaggle/input/animals-detection-images-dataset/'
+        dir = '/kaggle/input/animals-detection-images-dataset/'
         self.train_dir = os.path.join(dir, 'train')
         self.test_dir = os.path.join(dir, 'test')
 
@@ -17,9 +23,9 @@ class AnimalNetwork:
         #dataset de entrenamiento
         self.dataset = ds.tensorflow().map(lambda sample: (
                 tf.image.resize(tf.cast(tf.expand_dims(sample['images'], axis=0) , tf.uint8), (64, 64)) / 255.0,  
-                tf.one_hot(tf.cast(sample['labels'], tf.int32), depth=10)  
-               
+                tf.one_hot(tf.cast(sample['labels'], tf.int32), depth=10)
         ))     
+
         print("Dataset: ")
         first_element = next(iter(self.dataset.take(1)))
         image, label = first_element
@@ -35,8 +41,31 @@ class AnimalNetwork:
         ))
         print("Test Dataset: ")
         print(self.testset)
-    def loadNetwork(self):
-        return False
+
+    def loadNetwork(self): #le deseo la muerte a esta libreria basura que nunca agarra donde quiero
+        base_dir = Path(os.getcwd()) 
+        save_path = base_dir / "SavedFiles" / "model.h5"
+
+        print(f"Looking for model at: {save_path}")
+
+        if not save_path.exists():
+            print(f"Model file not found at {save_path}, creating new network...")
+            self.createNetwork()
+            return False
+
+        try:
+            self.model = tf.keras.models.load_model(save_path, 
+            custom_objects={
+                "LeakyReLU": LeakyReLU,
+                "swish": tf.nn.swish
+            })            
+            print("Network loaded successfully")
+            return True
+        except Exception as e:
+            print(f"Error loading network: {e}")
+            print("Creating new network...")
+            self.createNetwork()
+            return False
 
     def createNetwork(self):
         
@@ -70,48 +99,19 @@ class AnimalNetwork:
         
         #modificaciones a las imagenes
         #modifiers = tf.keras.preprocessing.image.ImageDataGenerator(rescale = 1/255)
-
-        
-
         
         history = self.model.fit(
             self.dataset,
             epochs = 40,      
             callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=2, verbose=1)]
-        ) 
+        )
+
+        #guardado de la red
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        save_path = os.path.join(base_dir, "SavedFiles", "mi_modelo.h5")
+        self.model.save(save_path)
+        print("Network saved")
         return True
-
-    
-    
-    def classifyTest(self):
-        image_paths = []
-        for root, dirs, files in os.walk(self.test_dir):
-            for file in files:
-                if file.endswith(('.png', '.jpg', '.jpeg')): 
-                    image_paths.append(os.path.join(root, file))
-        
-        image_paths = image_paths[:5]
-
-        for img_path in image_paths:
-            
-            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(224, 224))  # Load the image
-            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convert image to array
-            img_array = np.expand_dims(img_array, axis=0)  # Add batch dimension
-            img_array = img_array / 255.0  # Normalize image
-            
-            # Make a prediction
-            predictions = self.model.predict(img_array)
-            
-            # Get the predicted class
-            predicted_class = np.argmax(predictions, axis=1)
-            
-            # Retrieve the class labels from the model
-            class_labels = list(self.model.class_indices.keys())  # Retrieve the class labels
-            
-            # Print the image path and predicted class label
-            print(f"Image: {img_path}")
-            print(f"Predicted class: {class_labels[predicted_class[0]]}")
-            print("-" * 50)
     
     def classifyTestDeeplake(self):
         # Get a batch of test images and labels
@@ -126,5 +126,47 @@ class AnimalNetwork:
             predictions = self.model.predict(x_batch)
             predicted_class = np.argmax(predictions, axis=1)
 
-            print(f"Predicted Class: {predicted_class[0]}")
+            print(f"Predicted Animal: {predicted_class[0]}")
             print("-" * 50)
+
+    def uploadImage(self):
+        flag = True
+
+        while flag:
+            root = tk.Tk()
+            root.withdraw() #esconde la ventana de Tkinter
+            root.attributes('-topmost', True) #asegura que la ventana del File Chooser esté adelante
+        
+            img_path = filedialog.askopenfilename(
+                title="Select an image",
+                filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.PNG;*.JPG;*.JPEG")]
+            )
+
+            if img_path:
+                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Prepocesamiento de Imagen - Carga la imagen y la redimensiona
+                img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convierte la imagen a un array       
+                img_array = np.expand_dims(img_array, axis=0)  # expande la dimensión del batch (de 3D a 4D)
+                img_array = img_array / 255.0 # Normaliza la imagen (de 0 a 1) para hacer la predicción
+        
+                predictions = self.model.predict(img_array)  # hace la predicción
+                predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
+                print(f"Prediction: {predicted_class}")
+
+                # definimos el nombre de los animales 
+                class_labels = ["Cat", "Lynx", "Wolf", "Coyote", "Cheetah", "Jaguar", 
+                                "Chimpanzee", "Orangutan", "Hamster", "Guinea pig"]
+        
+                print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
+                print("-" * 50)
+            else:
+                print("No image selected.")
+
+            response = messagebox.askyesno("Confirmation", "Do you want to try again?")
+
+            if response:
+                flag = True
+            else:
+                flag = False
+
+
+        
