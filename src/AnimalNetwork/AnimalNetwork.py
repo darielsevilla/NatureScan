@@ -7,12 +7,13 @@ from pathlib import Path
 import sys
 from tensorflow.keras.layers import LeakyReLU
 from tkinter import filedialog
+from tkinter import messagebox
 
 class AnimalNetwork:
     def __init__(self):
         
         #enlaces de dataset para entrenar y probar
-        dir =  '/kaggle/input/animals-detection-images-dataset/'
+        dir = '/kaggle/input/animals-detection-images-dataset/'
         self.train_dir = os.path.join(dir, 'train')
         self.test_dir = os.path.join(dir, 'test')
 
@@ -22,9 +23,9 @@ class AnimalNetwork:
         #dataset de entrenamiento
         self.dataset = ds.tensorflow().map(lambda sample: (
                 tf.image.resize(tf.cast(tf.expand_dims(sample['images'], axis=0) , tf.uint8), (64, 64)) / 255.0,  
-                tf.one_hot(tf.cast(sample['labels'], tf.int32), depth=10)  
-               
+                tf.one_hot(tf.cast(sample['labels'], tf.int32), depth=10)
         ))     
+
         print("Dataset: ")
         first_element = next(iter(self.dataset.take(1)))
         image, label = first_element
@@ -129,28 +130,43 @@ class AnimalNetwork:
             print("-" * 50)
 
     def uploadImage(self):
-        root = tk.Tk()
-        root.withdraw() #esconde la ventana de Tkinter
-        
-        img_path = filedialog.askopenfilename(
-            title="Select an image",
-            filetypes=[("Image files", ".png;.jpg;*.jpeg")]
-        )
+        flag = True
 
-        if img_path:
-            img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Prepocesamiento de Imagen - Carga la imagen y la redimensiona
-            img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convierte la imagen a un array       
-            img_array = np.expand_dims(img_array, axis=0)  # expande la dimensión del batch (de 3D a 4D)
-            img_array = img_array / 255.0 # Normaliza la imagen (de 0 a 1) para hacer la predicción
+        while flag:
+            root = tk.Tk()
+            root.withdraw() #esconde la ventana de Tkinter
+            root.attributes('-topmost', True) #asegura que la ventana del File Chooser esté adelante
         
-            predictions = self.model.predict(img_array)  # hace la predicción
-            predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
+            img_path = filedialog.askopenfilename(
+                title="Select an image",
+                filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.PNG;*.JPG;*.JPEG")]
+            )
+
+            if img_path:
+                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64, 64, 3))  # Prepocesamiento de Imagen - Carga la imagen y la redimensiona
+                img_array = tf.keras.preprocessing.image.img_to_array(img)  # Convierte la imagen a un array       
+                img_array = np.expand_dims(img_array, axis=0)  # expande la dimensión del batch (de 3D a 4D)
+                img_array = img_array / 255.0 # Normaliza la imagen (de 0 a 1) para hacer la predicción
         
-            # definimos el nombre de los animales 
-            class_labels = ['lynx', 'guinea pig', 'jaguar', 'hamster', 'cat', 'cheetah',
-                            'coyote', 'chimpanzee', 'wolf', 'orangutan']
+                predictions = self.model.predict(img_array)  # hace la predicción
+                predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
+                print(f"Prediction: {predicted_class}")
+
+                # definimos el nombre de los animales 
+                class_labels = ["Cat", "Lynx", "Wolf", "Coyote", "Cheetah", "Jaguar", 
+                                "Chimpanzee", "Orangutan", "Hamster", "Guinea pig"]
         
-            print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
-            print("-" * 50)
-        else:
-            print("No image selected.")
+                print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
+                print("-" * 50)
+            else:
+                print("No image selected.")
+
+            response = messagebox.askyesno("Confirmation", "Do you want to try again?")
+
+            if response:
+                flag = True
+            else:
+                flag = False
+
+
+        
