@@ -50,6 +50,10 @@ class AnimalNetwork:
   
     
     def createNetwork(self):
+        base_dir = Path(os.getcwd())  
+        save_path = base_dir / "SavedFiles" / "model.h5"
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+
         #enlaces para datasets que no me mata la memoria de la compu
         #dataset de entrenamiento
         train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
@@ -136,10 +140,8 @@ class AnimalNetwork:
         )
 
         #guardado de la red
-        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        save_path = os.path.join(base_dir, "SavedFiles", "model.h5")
         self.model.save(save_path)
-        print("Network saved")
+        print("Network saved at: {save_path} ")
         return True
     
     
