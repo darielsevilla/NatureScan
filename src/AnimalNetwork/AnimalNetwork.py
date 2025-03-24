@@ -11,16 +11,10 @@ from tkinter import messagebox
 
 class AnimalNetwork:
     def __init__(self):
-        
         #enlaces de dataset para entrenar y probar
         self.train_dir = 'C:/Users/darie/Downloads/raw-img/'
         #self.train_dir = os.path.join(dir, 'train')
         #self.test_dir = os.path.join(dir, 'test')
-
-        
-        
-       
-  
 
     def loadNetwork(self): #le deseo la muerte a esta libreria basura que nunca agarra donde quiero
         base_dir = Path(os.getcwd()) 
@@ -46,8 +40,6 @@ class AnimalNetwork:
             print("Creating new network...")
             self.createNetwork()
             return False
-
-  
     
     def createNetwork(self):
         base_dir = Path(os.getcwd())  
