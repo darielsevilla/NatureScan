@@ -1,0 +1,100 @@
+[Animal]
+nombre_comun=Perro
+nombre_cientifico=Canis lupus familiaris
+descripcion=El perro es un mamífero domesticado, conocido por su lealtad, inteligencia y diversidad de razas. Se utiliza como mascota, guardián, y en trabajos de servicio. Su vínculo con los humanos es profundo, y se adapta a diversos ambientes y roles.
+ubicacion=Todo el mundo
+habitat=Varía según la raza (desde casas hasta áreas rurales)
+dieta=Omnívoro (carne, vegetales, y alimentos procesados)
+vida=10-15 años en promedio
+curiosidades=Se considera el mejor amigo del hombre debido a su relación cercana con los humanos.
+---
+[Animal]
+nombre_comun=Caballo
+nombre_cientifico=Equus ferus caballus
+descripcion=El caballo es un mamífero de gran tamaño, domesticado para trabajo y transporte. A lo largo de la historia, ha sido crucial en la agricultura, el transporte y la guerra. Además, posee una increíble capacidad para el aprendizaje y la memoria.
+ubicacion=Todo el mundo (en granjas, establos, y en la naturaleza)
+habitat=Praderas y zonas de pastoreo
+dieta=Herbívoro (principalmente pasto)
+vida=25-30 años en promedio
+curiosidades=Los caballos tienen una excelente visión periférica.
+---
+[Animal]
+nombre_comun=Elefante
+nombre_cientifico=Elephas maximus / Loxodonta africana
+descripcion=El elefante es el mamífero terrestre más grande, conocido por sus grandes orejas y trompa. Vive en manadas y muestra una gran inteligencia, formando lazos familiares muy fuertes. Su memoria excepcional les permite recordar rutas migratorias y otras habilidades esenciales.
+ubicacion=África y Asia
+habitat=Sabana, bosques y zonas húmedas
+dieta=Herbívoro (hierbas, corteza, frutas)
+vida=60-70 años en la naturaleza
+curiosidades=Los elefantes tienen una memoria excepcional y una gran inteligencia.
+---
+[Animal]
+nombre_comun=Mariposa
+nombre_cientifico=Lepidoptera
+descripcion=Las mariposas son insectos fascinantes, conocidas por sus coloridas alas y completo ciclo de vida. Experimentan una metamorfosis completa, pasando de huevo a oruga, luego pupa y finalmente emergiendo como adulto, y desempeñan un papel crucial en la polinización.
+ubicacion=Todo el mundo
+habitat=Bosques, jardines y praderas
+dieta=Néctar de flores
+vida=1-2 semanas como adulto (dependiendo de la especie)
+curiosidades=Las mariposas tienen una excelente visión ultravioleta, lo que les ayuda a encontrar flores.
+---
+[Animal]
+nombre_comun=Gallina
+nombre_cientifico=Gallus gallus domesticus
+descripcion=La gallina es un ave domesticada ampliamente conocida por su capacidad para poner huevos y proporcionar carne. Es social, vive en grupos y tiene un sistema de comunicación sofisticado. Se encuentra en una variedad de hábitats, desde granjas hasta casas rurales.
+ubicacion=Todo el mundo
+habitat=Aviarios y granjas
+dieta=Omnívoro (granos, insectos, restos de comida)
+vida=5-10 años en promedio
+curiosidades=Las gallinas pueden reconocer a más de 100 individuos de su especie.
+---
+[Animal]
+nombre_comun=Gato
+nombre_cientifico=Felis catus
+descripcion=El gato es un mamífero domesticado, conocido por su independencia, agilidad y habilidades para cazar. Son animales muy territorialistas y adaptables, capaces de vivir tanto en el interior de casas como en la naturaleza, siempre con una actitud curiosa.
+ubicacion=Todo el mundo
+habitat=Casas y áreas urbanas
+dieta=Carnívoro (principalmente carne)
+vida=12-16 años en promedio
+curiosidades=Los gatos tienen la capacidad de girar sus orejas a 180 grados.
+---
+[Animal]
+nombre_comun=Vaca
+nombre_cientifico=Bos taurus
+descripcion=La vaca es un mamífero domesticado que desempeña un papel fundamental en la producción de alimentos, especialmente en la industria láctea y cárnica. Son animales tranquilos, sociales y poseen un sistema digestivo complejo que les permite procesar plantas fibrosas.
+ubicacion=Todo el mundo (en granjas)
+habitat=Zonas rurales y de pastoreo
+dieta=Herbívoro (pasto, heno)
+vida=15-20 años en promedio
+curiosidades=Las vacas tienen amigos y pueden reconocer a otros animales y personas.
+---
+[Animal]
+nombre_comun=Oveja
+nombre_cientifico=Ovis aries
+descripcion=La oveja es un mamífero domesticado, conocido principalmente por su lana, la cual se utiliza en la industria textil. Son animales dóciles y de comportamiento gregario, muy importantes para la agricultura y la producción de carne en diversas regiones del mundo.
+ubicacion=Todo el mundo (en granjas y áreas rurales)
+habitat=Praderas y campos
+dieta=Herbívoro (pasto y hierbas)
+vida=10-12 años en promedio
+curiosidades=Las ovejas tienen una visión panorámica, lo que les permite detectar depredadores.
+---
+[Animal]
+nombre_comun=Araña
+nombre_cientifico=Araneae
+descripcion=Las arañas son arácnidos fascinantes, con una capacidad única para tejer telas de araña, que usan tanto para cazar como para protegerse. Aunque algunas especies son venenosas, la mayoría son inofensivas y juegan un papel importante en el control de plagas.
+ubicacion=Todo el mundo (en ambientes secos y húmedos)
+habitat=Rincones oscuros, árboles y estructuras
+dieta=Carnívoro (insectos)
+vida=1-2 años, dependiendo de la especie
+curiosidades=Algunas arañas pueden saltar hasta 50 veces la longitud de su cuerpo.
+---
+[Animal]
+nombre_comun=Ardilla
+nombre_cientifico=Sciuridae
+descripcion=Las ardillas son roedores ágiles que se destacan por su habilidad para trepar árboles y su instinto para almacenar alimentos, especialmente nueces. Se encuentran en todo tipo de hábitats, desde bosques hasta áreas urbanas, y son conocidas por su naturaleza curiosa y juguetona.
+ubicacion=Todo el mundo (en bosques y parques urbanos)
+habitat=Árboles y madrigueras subterráneas
+dieta=Omnívoro (nueces, frutas, hongos, insectos)
+vida=6-12 años en la naturaleza
+curiosidades=Las ardillas pueden girar sus patas traseras 180 grados para bajar de los árboles.
+---
