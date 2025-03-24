@@ -12,7 +12,7 @@ from tkinter import messagebox
 class AnimalNetwork:
     def __init__(self):
         #enlaces de dataset para entrenar y probar
-        self.train_dir = 'C:/Users/darie/Downloads/raw-img/'
+        self.train_dir = 'C:/Users/tatig/Documents/Unitec 2025/Lenguajes/Proyecto/NatureScan/src/imagenesTest/cat2.jpg'
         #self.train_dir = os.path.join(dir, 'train')
         #self.test_dir = os.path.join(dir, 'test')
 
@@ -40,7 +40,7 @@ class AnimalNetwork:
             print("Creating new network...")
             self.createNetwork()
             return False
-    
+        
     def createNetwork(self):
         base_dir = Path(os.getcwd())  
         save_path = base_dir / "SavedFiles" / "model.h5"
@@ -135,8 +135,6 @@ class AnimalNetwork:
         self.model.save(save_path)
         print("Network saved at: {save_path} ")
         return True
-    
-    
 
     def uploadImage(self):
         flag = True
@@ -182,9 +180,11 @@ class AnimalNetwork:
                 class_labels = ["Perro", "Caballo", "Elefante", "Mariposa", "Gallina", "Gato", 
                                 "Vaca", "Oveja", "Araña", "Ardilla"]
                 print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
+                return class_labels[predicted_class[0]]
                 print("-" * 50)
             else:
                 print("No image selected.")
+                return None
 
             response = messagebox.askyesno("Confirmation", "Do you want to try again?")
 
@@ -192,6 +192,35 @@ class AnimalNetwork:
                 flag = True
             else:
                 flag = False
+    
+    def findAnimal(self, nombre_comun,archivo="./src/AnimalNetwork/AnimalDetails.txt"):
+        with open(archivo, "r", encoding="utf-8") as file:
+            datos_animal = {}
+            for line in file:
+                line = line.strip()  # Limpiar espacios extra
+                if line == "[Animal]": 
+                    datos_animal = {}  
+                elif line == "---":  
+                    if 'nombre_comun' in datos_animal and datos_animal['nombre_comun'].lower() == nombre_comun.lower():
+                        return datos_animal  
+                elif "=" in line:  
+                    clave, valor = line.split("=", 1)
+                    datos_animal[clave.strip().lower()] = valor.strip() 
+            return None  
+        
+    def animalDetails(self, nombre):
+        animal = self.findAnimal(nombre)
+        
+        # Imprime la información del animal
+        if animal:
+            print(f"Información sobre el {nombre}:")
+            print("Nombre Científico:", animal['nombre_cientifico'])
+            print("Descripción:", animal['descripcion'])
+            print("Ubicación:", animal['ubicacion'])
+            print("Esperanza de Vida:", animal['vida'])
+            print("Datos Curiosos:", animal['curiosidades'])
+        else:
+            print(f"{nombre} no fue encontrado en la base de datos.")
 
 
         

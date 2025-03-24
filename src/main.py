@@ -1,4 +1,5 @@
 from AnimalNetwork import AnimalNetwork as AN
+from PlantNetwork import PlantNetwork as PN
 import tkinter as tk
 
 def main():
@@ -10,10 +11,13 @@ def main():
         animalNetwork = AN.AnimalNetwork()
         animalNetwork.loadNetwork()
         #animalNetwork.classifyTestDeeplake()
-        animalNetwork.uploadImage()
+        animal = animalNetwork.uploadImage()
+        animalNetwork.animalDetails(animal)
 
     def accion_boton2():
-        print("Botón 2 presionado")
+        plantNetwork = PN.PlantNetwork()
+        plant = plantNetwork.loadNetwork()
+        plantNetwork.plantDetails(plant)
 
     label = tk.Label(root, text="Seleccione una opción:", font=("Arial", 12))
     label.pack(pady=10)
@@ -25,6 +29,3 @@ def main():
     btn2.pack(pady=10)
 
     root.mainloop()
-    
-if __name__ == '__main__':
-    main()
