@@ -58,7 +58,7 @@ class AnimalNetwork:
         # Loading the data
         self.dataset = train_datagen.flow_from_directory(
             self.train_dir,
-            target_size=(64, 64), 
+            target_size=(96, 96), 
             class_mode='categorical'  
         )
   
@@ -81,12 +81,12 @@ class AnimalNetwork:
         #Flatten -> cque convierte data de 2D (como una foto de mxn dimensiones) en un arreglo 1D, osea q toda el valor de cada pixel y lo pone en un arreglo que puede usar de input para la red neuronal
         self.model = tf.keras.Sequential([
           
-            tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(64,64,3)),
+            tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(96,96,3)),
             tf.keras.layers.BatchNormalization(),
             tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1)),
             tf.keras.layers.BatchNormalization(),
             tf.keras.layers.MaxPooling2D(2,2),
-
+ 
             tf.keras.layers.Conv2D(64, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1), padding = 'same'),
             tf.keras.layers.BatchNormalization(),
              tf.keras.layers.Conv2D(64, (3,3),  activation=tf.keras.layers.LeakyReLU(alpha=0.1), padding = 'same'),
@@ -127,7 +127,7 @@ class AnimalNetwork:
         
         history = self.model.fit(
             self.dataset,
-            epochs = 30, 
+            epochs = 15, 
             #steps_per_epoch=5000,     
             callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=5, verbose=1)]
         )
@@ -155,7 +155,11 @@ class AnimalNetwork:
             root.destroy()  # Cierra la ventana oculta de Tkinter
 
             if img_path:
-                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64,64,3))
+                print("path")
+                print(img_path)
+                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(96,96,3)) 
+                print("img")
+                print(img)
                 img_array = tf.keras.preprocessing.image.img_to_array(img)
                 img_array = tf.cast(img_array, tf.uint8)
     
