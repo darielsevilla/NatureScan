@@ -1,0 +1,44 @@
+[Planta]
+nombre=Margarita
+nombre_cientifico=Bellis perennis
+descripcion=La margarita es una planta herbácea perenne, conocida por sus flores con pétalos blancos y un centro amarillo. Es comúnmente encontrada en campos y praderas.
+ubicacion=Europa, Asia
+origen=Europa
+familia=Asteraceae
+curiosidades=La margarita es símbolo de pureza y simplicidad. Se utiliza en medicina tradicional para tratar afecciones respiratorias y para aliviar dolores de cabeza.
+---
+[Planta]
+nombre=Diente de león
+nombre_cientifico=Taraxacum officinale
+descripcion=El diente de león es una planta herbácea perenne con flores amarillas que se transforman en una esfera de semillas voladoras. Es conocido por sus propiedades medicinales.
+ubicacion=América del Norte, Europa, Asia
+origen=Europa y Asia
+familia=Asteraceae
+curiosidades=El diente de león es comestible en todas sus partes y es utilizado en la medicina tradicional para tratar afecciones digestivas y del hígado.
+---
+[Planta]
+nombre=Rosa
+nombre_cientifico=Rosa spp.
+descripcion=Las rosas son arbustos perennes que producen flores grandes y fragantes en una variedad de colores. Son populares como ornamentales y se utilizan en perfumería.
+ubicacion=Global, principalmente en climas templados
+origen=Asia, Europa, América del Norte
+familia=Rosaceae
+curiosidades=La rosa es la flor nacional de Estados Unidos y simboliza el amor, la belleza y el misterio. Las rosas también tienen aplicaciones medicinales, especialmente en aromaterapia.
+---
+[Planta]
+nombre=Girasol
+nombre_cientifico=Helianthus annuus
+descripcion=El girasol es una planta anual que se caracteriza por su gran flor amarilla que sigue el movimiento del sol durante el día. Es conocido por sus semillas comestibles.
+ubicacion=América del Norte, Europa, Asia
+origen=América del Norte
+familia=Asteraceae
+curiosidades=El girasol es cultivado no solo por su belleza, sino también por sus semillas, que se utilizan para hacer aceite de girasol y otros productos alimenticios.
+---
+[Planta]
+nombre=Tulipán
+nombre_cientifico=Tulipa spp.
+descripcion=El tulipán es una planta bulbosa que produce flores grandes y coloridas. Es muy apreciado en jardinería y tiene una gran variedad de colores, como rojo, amarillo, blanco y morado.
+ubicacion=Europa, Asia Central
+origen=Asia Central
+familia=Liliaceae
+curiosidades=El tulipán fue muy valorado durante la "tulipomanía" en los Países Bajos en el siglo XVII, un periodo durante el cual los precios de los bulbos de tulipán llegaron a ser absurdamente altos.
