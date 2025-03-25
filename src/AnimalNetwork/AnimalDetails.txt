@@ -1,100 +1,99 @@
 [Animal]
-nombre_comun=Perro
-nombre_cientifico=Canis lupus familiaris
-descripcion=El perro es un mamífero domesticado, conocido por su lealtad, inteligencia y diversidad de razas. Se utiliza como mascota, guardián, y en trabajos de servicio. Su vínculo con los humanos es profundo, y se adapta a diversos ambientes y roles.
-ubicacion=Todo el mundo
-habitat=Varía según la raza (desde casas hasta áreas rurales)
-dieta=Omnívoro (carne, vegetales, y alimentos procesados)
-vida=10-15 años en promedio
-curiosidades=Se considera el mejor amigo del hombre debido a su relación cercana con los humanos.
+common_name=Dog
+scientific_name=Canis lupus familiaris
+description=The dog is a domesticated mammal known for its loyalty, intelligence, and variety of breeds. It is used as a pet, guardian, and in service work. Its bond with humans is deep, and it adapts to various environments and roles.
+location=Worldwide
+habitat=Varies by breed (from homes to rural areas)
+diet=Omnivore (meat, vegetables, and processed foods)
+life_span=10-15 years on average
+fun_fact=It is considered man's best friend due to its close relationship with humans.
 ---
 [Animal]
-nombre_comun=Caballo
-nombre_cientifico=Equus ferus caballus
-descripcion=El caballo es un mamífero de gran tamaño, domesticado para trabajo y transporte. A lo largo de la historia, ha sido crucial en la agricultura, el transporte y la guerra. Además, posee una increíble capacidad para el aprendizaje y la memoria.
-ubicacion=Todo el mundo (en granjas, establos, y en la naturaleza)
-habitat=Praderas y zonas de pastoreo
-dieta=Herbívoro (principalmente pasto)
-vida=25-30 años en promedio
-curiosidades=Los caballos tienen una excelente visión periférica.
+common_name=Horse
+scientific_name=Equus ferus caballus
+description=The horse is a large mammal domesticated for work and transportation. Throughout history, it has been crucial in agriculture, transportation, and war. It also has an incredible ability for learning and memory.
+location=Worldwide (on farms, stables, and in nature)
+habitat=Grasslands and grazing areas
+diet=Herbivore (mainly grass)
+life_span=25-30 years on average
+fun_fact=Horses have excellent peripheral vision.
 ---
 [Animal]
-nombre_comun=Elefante
-nombre_cientifico=Elephas maximus / Loxodonta africana
-descripcion=El elefante es el mamífero terrestre más grande, conocido por sus grandes orejas y trompa. Vive en manadas y muestra una gran inteligencia, formando lazos familiares muy fuertes. Su memoria excepcional les permite recordar rutas migratorias y otras habilidades esenciales.
-ubicacion=África y Asia
-habitat=Sabana, bosques y zonas húmedas
-dieta=Herbívoro (hierbas, corteza, frutas)
-vida=60-70 años en la naturaleza
-curiosidades=Los elefantes tienen una memoria excepcional y una gran inteligencia.
+common_name=Elephant
+scientific_name=Elephas maximus / Loxodonta africana
+description=The elephant is the largest terrestrial mammal, known for its large ears and trunk. It lives in herds and shows great intelligence, forming strong family bonds. Its exceptional memory allows them to remember migratory routes and other essential skills.
+location=Africa and Asia
+habitat=Savannas, forests, and wetlands
+diet=Herbivore (grasses, bark, fruits)
+life_span=60-70 years in the wild
+fun_fact=Elephants have exceptional memory and great intelligence.
 ---
 [Animal]
-nombre_comun=Mariposa
-nombre_cientifico=Lepidoptera
-descripcion=Las mariposas son insectos fascinantes, conocidas por sus coloridas alas y completo ciclo de vida. Experimentan una metamorfosis completa, pasando de huevo a oruga, luego pupa y finalmente emergiendo como adulto, y desempeñan un papel crucial en la polinización.
-ubicacion=Todo el mundo
-habitat=Bosques, jardines y praderas
-dieta=Néctar de flores
-vida=1-2 semanas como adulto (dependiendo de la especie)
-curiosidades=Las mariposas tienen una excelente visión ultravioleta, lo que les ayuda a encontrar flores.
+common_name=Butterfly
+scientific_name=Lepidoptera
+description=Butterflies are fascinating insects known for their colorful wings and complete life cycle. They undergo complete metamorphosis, from egg to caterpillar, then pupa, and finally emerge as adults, playing a crucial role in pollination.
+location=Worldwide
+habitat=Forests, gardens, and meadows
+diet=Flower nectar
+life_span=1-2 weeks as adults (depending on the species)
+fun_fact=Butterflies have excellent ultraviolet vision, which helps them find flowers.
 ---
 [Animal]
-nombre_comun=Gallina
-nombre_cientifico=Gallus gallus domesticus
-descripcion=La gallina es un ave domesticada ampliamente conocida por su capacidad para poner huevos y proporcionar carne. Es social, vive en grupos y tiene un sistema de comunicación sofisticado. Se encuentra en una variedad de hábitats, desde granjas hasta casas rurales.
-ubicacion=Todo el mundo
-habitat=Aviarios y granjas
-dieta=Omnívoro (granos, insectos, restos de comida)
-vida=5-10 años en promedio
-curiosidades=Las gallinas pueden reconocer a más de 100 individuos de su especie.
+common_name=Hen
+scientific_name=Gallus gallus domesticus
+description=The hen is a domesticated bird widely known for its ability to lay eggs and provide meat. It is social, lives in groups, and has a sophisticated communication system. It can be found in various habitats, from farms to rural homes.
+location=Worldwide
+habitat=Aviaries and farms
+diet=Omnivore (grains, insects, food scraps)
+life_span=5-10 years on average
+fun_fact=Hens can recognize over 100 individuals of their species.
 ---
 [Animal]
-nombre_comun=Gato
-nombre_cientifico=Felis catus
-descripcion=El gato es un mamífero domesticado, conocido por su independencia, agilidad y habilidades para cazar. Son animales muy territorialistas y adaptables, capaces de vivir tanto en el interior de casas como en la naturaleza, siempre con una actitud curiosa.
-ubicacion=Todo el mundo
-habitat=Casas y áreas urbanas
-dieta=Carnívoro (principalmente carne)
-vida=12-16 años en promedio
-curiosidades=Los gatos tienen la capacidad de girar sus orejas a 180 grados.
+common_name=Cat
+scientific_name=Felis catus
+description=The cat is a domesticated mammal known for its independence, agility, and hunting skills. They are very territorial and adaptable animals, capable of living both indoors and in nature, always with a curious attitude.
+location=Worldwide
+habitat=Homes and urban areas
+diet=Carnivore (mainly meat)
+life_span=12-16 years on average
+fun_fact=Cats can rotate their ears 180 degrees.
 ---
 [Animal]
-nombre_comun=Vaca
-nombre_cientifico=Bos taurus
-descripcion=La vaca es un mamífero domesticado que desempeña un papel fundamental en la producción de alimentos, especialmente en la industria láctea y cárnica. Son animales tranquilos, sociales y poseen un sistema digestivo complejo que les permite procesar plantas fibrosas.
-ubicacion=Todo el mundo (en granjas)
-habitat=Zonas rurales y de pastoreo
-dieta=Herbívoro (pasto, heno)
-vida=15-20 años en promedio
-curiosidades=Las vacas tienen amigos y pueden reconocer a otros animales y personas.
+common_name=Cow
+scientific_name=Bos taurus
+description=The cow is a domesticated mammal that plays a fundamental role in food production, especially in the dairy and meat industries. They are calm, social animals with a complex digestive system that allows them to process fibrous plants.
+location=Worldwide (on farms)
+habitat=Rural and grazing areas
+diet=Herbivore (grass, hay)
+life_span=15-20 years on average
+fun_fact=Cows have friends and can recognize other animals and people.
 ---
 [Animal]
-nombre_comun=Oveja
-nombre_cientifico=Ovis aries
-descripcion=La oveja es un mamífero domesticado, conocido principalmente por su lana, la cual se utiliza en la industria textil. Son animales dóciles y de comportamiento gregario, muy importantes para la agricultura y la producción de carne en diversas regiones del mundo.
-ubicacion=Todo el mundo (en granjas y áreas rurales)
-habitat=Praderas y campos
-dieta=Herbívoro (pasto y hierbas)
-vida=10-12 años en promedio
-curiosidades=Las ovejas tienen una visión panorámica, lo que les permite detectar depredadores.
+common_name=Sheep
+scientific_name=Ovis aries
+description=The sheep is a domesticated mammal known mainly for its wool, which is used in the textile industry. They are docile animals with a gregarious nature, very important for agriculture and meat production in various regions of the world.
+location=Worldwide (on farms and rural areas)
+habitat=Meadows and fields
+diet=Herbivore (grass and herbs)
+life_span=10-12 years on average
+fun_fact=Sheep have panoramic vision, which helps them detect predators.
 ---
 [Animal]
-nombre_comun=Araña
-nombre_cientifico=Araneae
-descripcion=Las arañas son arácnidos fascinantes, con una capacidad única para tejer telas de araña, que usan tanto para cazar como para protegerse. Aunque algunas especies son venenosas, la mayoría son inofensivas y juegan un papel importante en el control de plagas.
-ubicacion=Todo el mundo (en ambientes secos y húmedos)
-habitat=Rincones oscuros, árboles y estructuras
-dieta=Carnívoro (insectos)
-vida=1-2 años, dependiendo de la especie
-curiosidades=Algunas arañas pueden saltar hasta 50 veces la longitud de su cuerpo.
+common_name=Spider
+scientific_name=Araneae
+description=Spiders are fascinating arachnids with a unique ability to weave webs, which they use both to hunt and to protect themselves. While some species are venomous, most are harmless and play an important role in pest control.
+location=Worldwide (in dry and humid environments)
+habitat=Dark corners, trees, and structures
+diet=Carnivore (insects)
+life_span=1-2 years, depending on the species
+fun_fact=Some spiders can jump up to 50 times their body length.
 ---
 [Animal]
-nombre_comun=Ardilla
-nombre_cientifico=Sciuridae
-descripcion=Las ardillas son roedores ágiles que se destacan por su habilidad para trepar árboles y su instinto para almacenar alimentos, especialmente nueces. Se encuentran en todo tipo de hábitats, desde bosques hasta áreas urbanas, y son conocidas por su naturaleza curiosa y juguetona.
-ubicacion=Todo el mundo (en bosques y parques urbanos)
-habitat=Árboles y madrigueras subterráneas
-dieta=Omnívoro (nueces, frutas, hongos, insectos)
-vida=6-12 años en la naturaleza
-curiosidades=Las ardillas pueden girar sus patas traseras 180 grados para bajar de los árboles.
----
+common_name=Squirrel
+scientific_name=Sciuridae
+description=Squirrels are agile rodents known for their ability to climb trees and their instinct to store food, especially nuts. They are found in all types of habitats, from forests to urban areas, and are known for their curious and playful nature.
+location=Worldwide (in forests and urban parks)
+habitat=Trees and underground burrows
+diet=Omnivore (nuts, fruits, fungi, insects)
+life_span=6-12 years in the wild
+fun_fact=Squirrels can rotate their back feet 180 degrees to descend from trees.

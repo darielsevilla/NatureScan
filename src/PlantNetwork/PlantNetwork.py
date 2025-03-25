@@ -17,7 +17,6 @@ from sklearn.preprocessing import LabelEncoder
 from tensorflow.keras.layers import BatchNormalization
 from tensorflow.keras.models import load_model
 from keras.preprocessing import image
-from kindwise import PlantApi, PlantIdentification, UsageInfo
 
 class PlantNetwork:
     def findPlant(self, nombre,archivo="./src/PlantNetwork/PlantDetails.txt"):
