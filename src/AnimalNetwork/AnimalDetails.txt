@@ -1,0 +1,99 @@
+[Animal]
+common_name=Dog
+scientific_name=Canis lupus familiaris
+description=The dog is a domesticated mammal known for its loyalty, intelligence, and variety of breeds. It is used as a pet, guardian, and in service work. Its bond with humans is deep, and it adapts to various environments and roles.
+location=Worldwide
+habitat=Varies by breed (from homes to rural areas)
+diet=Omnivore (meat, vegetables, and processed foods)
+life_span=10-15 years on average
+fun_fact=It is considered man's best friend due to its close relationship with humans.
+---
+[Animal]
+common_name=Horse
+scientific_name=Equus ferus caballus
+description=The horse is a large mammal domesticated for work and transportation. Throughout history, it has been crucial in agriculture, transportation, and war. It also has an incredible ability for learning and memory.
+location=Worldwide (on farms, stables, and in nature)
+habitat=Grasslands and grazing areas
+diet=Herbivore (mainly grass)
+life_span=25-30 years on average
+fun_fact=Horses have excellent peripheral vision.
+---
+[Animal]
+common_name=Elephant
+scientific_name=Elephas maximus / Loxodonta africana
+description=The elephant is the largest terrestrial mammal, known for its large ears and trunk. It lives in herds and shows great intelligence, forming strong family bonds. Its exceptional memory allows them to remember migratory routes and other essential skills.
+location=Africa and Asia
+habitat=Savannas, forests, and wetlands
+diet=Herbivore (grasses, bark, fruits)
+life_span=60-70 years in the wild
+fun_fact=Elephants have exceptional memory and great intelligence.
+---
+[Animal]
+common_name=Butterfly
+scientific_name=Lepidoptera
+description=Butterflies are fascinating insects known for their colorful wings and complete life cycle. They undergo complete metamorphosis, from egg to caterpillar, then pupa, and finally emerge as adults, playing a crucial role in pollination.
+location=Worldwide
+habitat=Forests, gardens, and meadows
+diet=Flower nectar
+life_span=1-2 weeks as adults (depending on the species)
+fun_fact=Butterflies have excellent ultraviolet vision, which helps them find flowers.
+---
+[Animal]
+common_name=Hen
+scientific_name=Gallus gallus domesticus
+description=The hen is a domesticated bird widely known for its ability to lay eggs and provide meat. It is social, lives in groups, and has a sophisticated communication system. It can be found in various habitats, from farms to rural homes.
+location=Worldwide
+habitat=Aviaries and farms
+diet=Omnivore (grains, insects, food scraps)
+life_span=5-10 years on average
+fun_fact=Hens can recognize over 100 individuals of their species.
+---
+[Animal]
+common_name=Cat
+scientific_name=Felis catus
+description=The cat is a domesticated mammal known for its independence, agility, and hunting skills. They are very territorial and adaptable animals, capable of living both indoors and in nature, always with a curious attitude.
+location=Worldwide
+habitat=Homes and urban areas
+diet=Carnivore (mainly meat)
+life_span=12-16 years on average
+fun_fact=Cats can rotate their ears 180 degrees.
+---
+[Animal]
+common_name=Cow
+scientific_name=Bos taurus
+description=The cow is a domesticated mammal that plays a fundamental role in food production, especially in the dairy and meat industries. They are calm, social animals with a complex digestive system that allows them to process fibrous plants.
+location=Worldwide (on farms)
+habitat=Rural and grazing areas
+diet=Herbivore (grass, hay)
+life_span=15-20 years on average
+fun_fact=Cows have friends and can recognize other animals and people.
+---
+[Animal]
+common_name=Sheep
+scientific_name=Ovis aries
+description=The sheep is a domesticated mammal known mainly for its wool, which is used in the textile industry. They are docile animals with a gregarious nature, very important for agriculture and meat production in various regions of the world.
+location=Worldwide (on farms and rural areas)
+habitat=Meadows and fields
+diet=Herbivore (grass and herbs)
+life_span=10-12 years on average
+fun_fact=Sheep have panoramic vision, which helps them detect predators.
+---
+[Animal]
+common_name=Spider
+scientific_name=Araneae
+description=Spiders are fascinating arachnids with a unique ability to weave webs, which they use both to hunt and to protect themselves. While some species are venomous, most are harmless and play an important role in pest control.
+location=Worldwide (in dry and humid environments)
+habitat=Dark corners, trees, and structures
+diet=Carnivore (insects)
+life_span=1-2 years, depending on the species
+fun_fact=Some spiders can jump up to 50 times their body length.
+---
+[Animal]
+common_name=Squirrel
+scientific_name=Sciuridae
+description=Squirrels are agile rodents known for their ability to climb trees and their instinct to store food, especially nuts. They are found in all types of habitats, from forests to urban areas, and are known for their curious and playful nature.
+location=Worldwide (in forests and urban parks)
+habitat=Trees and underground burrows
+diet=Omnivore (nuts, fruits, fungi, insects)
+life_span=6-12 years in the wild
+fun_fact=Squirrels can rotate their back feet 180 degrees to descend from trees.
