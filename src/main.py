@@ -1,18 +1,35 @@
 from AnimalNetwork import AnimalNetwork as AN
 from PlantNetwork import PlantNetwork as PN
+import tkinter as tk
 
 def main():
-    animalNetwork = AN.AnimalNetwork()
-    plantNetwork = PN.PlantNetwork()
+    root = tk.Tk()
+    root.title("Menú")
+    root.geometry("300x250")
 
-    # animalNetwork.loadNetwork()
-    # #animalNetwork.classifyTestDeeplake()
-    # animal = animalNetwork.uploadImage()
-    # print(animal)
-    # animalNetwork.animalDetails(animal)
+    def Animal_Scan():
+        animalNetwork = AN.AnimalNetwork()
+        animalNetwork.loadNetwork()
+        #animalNetwork.classifyTestDeeplake()
+        animalNetwork.uploadImage()
 
-    plant = plantNetwork.loadNetwork()
-    print(plant)
-    plantNetwork.plantDetails(plant)
+    def Plant_Scan():
+        plantNetwork = PN.PlantNetwork()
+        plant = plantNetwork.loadNetwork()
+        plantNetwork.plantDetails(plant)
+
+    label = tk.Label(root, text="", font=("Helvetica", 12))
+    label.pack(pady=10)
+    label = tk.Label(root, text="Select an option:", font=("Helvetica", 12))
+    label.pack(pady=10)
+
+    btn1 = tk.Button(root, text="Animal Scan", font=("Helvetica", 10), command=Animal_Scan)
+    btn2 = tk.Button(root, text="Plant Scan", font=("Helvetica", 10), command=Plant_Scan)
+
+    btn1.pack(pady=10)
+    btn2.pack(pady=10)
+
+    root.mainloop()
+
 if __name__ == '__main__':
     main()

@@ -1,17 +1,17 @@
 import tensorflow as tf
 import numpy as np
 import os
-import deeplake
 import tkinter as tk
 from pathlib import Path
-import sys
 from tensorflow.keras.layers import LeakyReLU
 from tkinter import filedialog
 from tkinter import messagebox
+from PIL import Image, ImageTk
+
+global img_tk
 
 class AnimalNetwork:
     def __init__(self):
-        
         #enlaces de dataset para entrenar y probar
         self.train_dir = 'C:/Users/tatig/Documents/Unitec 2025/Lenguajes/Proyecto/NatureScan/src/imagenesTest/cat2.jpg'
         #self.train_dir = os.path.join(dir, 'train')
@@ -41,7 +41,7 @@ class AnimalNetwork:
             print("Creating new network...")
             self.createNetwork()
             return False
-
+        
     def createNetwork(self):
         base_dir = Path(os.getcwd())  
         save_path = base_dir / "SavedFiles" / "model.h5"
@@ -136,65 +136,117 @@ class AnimalNetwork:
         self.model.save(save_path)
         print("Network saved at: {save_path} ")
         return True
-
+        
     def uploadImage(self):
         flag = True
-        train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
-            rescale=1./255
-        )
+        global img_tk 
 
         while flag:
             root = tk.Tk()
             root.withdraw() #esconde la ventana de Tkinter
             root.attributes('-topmost', True) #asegura que la ventana del File Chooser esté adelante
         
+            #File Chooser
             img_path = filedialog.askopenfilename(
                 title="Select an image",
                 filetypes=[("Image files", "*.png;*.jpg;*.jpeg;*.PNG;*.JPG;*.JPEG")]
             )
 
+            root.destroy()  # Cierra la ventana oculta de Tkinter
+
             if img_path:
-                print("path")
-                print(img_path)
-                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64,64,3)) 
-                print("img")
-                print(img)
+                img = tf.keras.preprocessing.image.load_img(img_path, target_size=(64,64,3))
                 img_array = tf.keras.preprocessing.image.img_to_array(img)
-                #img_array = tf.image.convert_image_dtype(img_array, tf.float32)  
                 img_array = tf.cast(img_array, tf.uint8)
     
-    # Normalize the image to [0, 1]
+                # Normalize the image to [0, 1]
                 img_array = np.expand_dims(img_array, axis=0)  
-                                
-
                 img_array = img_array / 255.0 # Normaliza la imagen (de 0 a 1) para hacer la predicción
-                print("img_array")   
-                print(img_array)
+                
                 predictions = self.model.predict(img_array)  # hace la predicción
-                print(predictions)
                 predicted_class = np.argmax(predictions, axis=1) # obtiene el índice de la clase de la predicción
                 print(f"Prediction: {predicted_class}")
 
-                # definimos el nombre de los animales 
-                #class_labels = ["Cat", "Lynx", "Wolf", "Coyote", "Cheetah", "Jaguar", 
-                #                "Chimpanzee", "Orangutan", "Hamster", "Guinea pig"]
-                class_labels = ["Perro", "Caballo", "Elefante", "Mariposa", "Gallina", "Gato", 
-                                "Vaca", "Oveja", "Araña", "Ardilla"]
-                print(f"Predicted Animal: {class_labels[predicted_class[0]]}")
-                return class_labels[predicted_class[0]]
-                print("-" * 50)
+                # definimos el nombre de los animales
+                class_labels = ["Dog", "Horse", "Elephant", "Butterfly", "Hen", "Cat", 
+                "Cow", "Sheep", "Spider", "Squirrel"]
+
+                #inicializacion de la ventana del resultado
+                result_window = tk.Tk()
+                result_window.title("Prediction Result")
+                result_window.geometry("800x670")
+
+                #img = Image.open(img_path)  
+                #img = img.resize((150, 150)) # Redimensionar imagen
+                #picture = ImageTk.PhotoImage(img) # Guarda la referencia
+
+                #print(f"Image opened: {picture}")
+                # Crear Label con la imagen
+                # label_img = tk.Label(result_window, image=picture)
+                # label_img.image = picture
+                # label_img.pack(pady=10)
+
+                # Mostrar el texto de la predicción
+                # label_text = tk.Label(result_window, text=f"Predicted Animal: {class_labels[predicted_class[0]]}", font=("Arial", 12))
+                # label_text.pack(pady=5)
+
+                animalName = class_labels[predicted_class[0]]
+
+                label = tk.Label(result_window, text="The predicted animal is...", font=("Helvetica", 12))
+                label.pack(pady=10)
+
+                label = tk.Label(result_window, text=f"{animalName}!", font=("Helvetica", 16, "bold"))
+                label.pack(pady=10)
+
+                animal = self.findAnimal(animalName)
+        
+                # Imprime la información del animal
+                if animal:
+                    label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text=f"Scientific Name", font=("Helvetica", 12, "bold"))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text=f"{animal['scientific_name']}", font=("Helvetica", 12))
+                    label.pack(pady=10)
+
+                    label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text="Description", font=("Helvetica", 12, "bold"))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text=f"{animal['description']}", font=("Helvetica", 12), wraplength=600)
+                    label.pack(pady=10)
+
+                    label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text="Life Expectancy", font=("Helvetica", 12, "bold"))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text=f"{animal['life_span']}", font=("Helvetica", 12))
+                    label.pack(pady=10)
+
+                    label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text="Interesting Facts", font=("Helvetica", 12, "bold"))
+                    label.pack(pady=10)
+                    label = tk.Label(result_window, text=f"{animal['fun_fact']}", font=("Helvetica", 12))
+                    label.pack(pady=10)
+                else:
+                    print(f"{animalName} was not found in the database.")
+
+                result_window.mainloop()  # Ejecutar la nueva ventana
+
+                return animalName
             else:
                 print("No image selected.")
                 return None
 
-            response = messagebox.askyesno("Confirmation", "Do you want to try again?")
+        response = messagebox.askyesno("Confirmation", "Do you want to try again?")
 
-            if response:
-                flag = True
-            else:
-                flag = False
-    
-    def findAnimal(self, nombre_comun,archivo="./src/AnimalNetwork/AnimalDetails.txt"):
+        if response:
+            flag = True
+        else:
+            flag = False
+
+    def findAnimal(self, nombre_comun, archivo="./src/AnimalNetwork/AnimalDetails.txt"):
         with open(archivo, "r", encoding="utf-8") as file:
             datos_animal = {}
             for line in file:
@@ -202,26 +254,9 @@ class AnimalNetwork:
                 if line == "[Animal]": 
                     datos_animal = {}  
                 elif line == "---":  
-                    if 'nombre_comun' in datos_animal and datos_animal['nombre_comun'].lower() == nombre_comun.lower():
+                    if 'common_name' in datos_animal and datos_animal['common_name'].lower() == nombre_comun.lower():
                         return datos_animal  
                 elif "=" in line:  
                     clave, valor = line.split("=", 1)
                     datos_animal[clave.strip().lower()] = valor.strip() 
             return None  
-        
-    def animalDetails(self, nombre):
-        animal = self.findAnimal(nombre)
-        
-        # Imprime la información del animal
-        if animal:
-            print(f"Información sobre el {nombre}:")
-            print("Nombre Científico:", animal['nombre_cientifico'])
-            print("Descripción:", animal['descripcion'])
-            print("Ubicación:", animal['ubicacion'])
-            print("Esperanza de Vida:", animal['vida'])
-            print("Datos Curiosos:", animal['curiosidades'])
-        else:
-            print(f"{nombre} no fue encontrado en la base de datos.")
-
-
-        
