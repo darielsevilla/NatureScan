@@ -13,7 +13,8 @@ global img_tk
 class AnimalNetwork:
     def __init__(self):
         #enlaces de dataset para entrenar y probar
-        self.train_dir = 'C:/Users/tatig/Documents/Unitec 2025/Lenguajes/Proyecto/NatureScan/src/imagenesTest/cat2.jpg'
+        #self.train_dir = 'C:/Users/tatig/Documents/Unitec 2025/Lenguajes/Proyecto/NatureScan/src/imagenesTest/cat2.jpg'
+        self.train_dir = 'C:/Users/darie/Downloads/raw-img/'
         #self.train_dir = os.path.join(dir, 'train')
         #self.test_dir = os.path.join(dir, 'test')
 
@@ -50,7 +51,15 @@ class AnimalNetwork:
         #enlaces para datasets que no me mata la memoria de la compu
         #dataset de entrenamiento
         train_datagen = tf.keras.preprocessing.image.ImageDataGenerator(
-            rescale=1./255,
+            rescale=1.0/255.0,
+            rotation_range=25,  
+            width_shift_range=0.3,  
+            height_shift_range=0.3,  
+            shear_range=0.2,  
+            zoom_range=0.2, 
+            horizontal_flip=True,  
+            brightness_range=[0.7, 1.3], 
+            fill_mode='nearest'  
         )
 
         ##test_datagen = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1./255)
@@ -58,22 +67,21 @@ class AnimalNetwork:
         # Loading the data
         self.dataset = train_datagen.flow_from_directory(
             self.train_dir,
-            target_size=(96, 96), 
-            class_mode='categorical'  
+            target_size=(64, 64), 
+            class_mode='categorical',  
+            shuffle=True
         )
+
+        #self.dataset = tf.data.Dataset.from_generator(
+        #    lambda: self.dataset,
+        #    output_signature=(
+        #        tf.TensorSpec(shape=(None, 96, 96, 3), dtype=tf.float32),
+        #        tf.TensorSpec(shape=(None, self.dataset.num_classes), dtype=tf.float32)
+        #    )
+        #)
+
   
-
-        def augment(image, label):
-            image = tf.image.resize(image, [128, 128])  # Keep high res initially
-            image = tf.image.random_flip_left_right(image)
-            image = tf.image.random_brightness(image, max_delta=0.05)
-            
-            image = tf.image.random_contrast(image, lower=0.7, upper=1.3)
-            image = tf.image.adjust_contrast(image, contrast_factor=2.0)
-            image = tf.image.resize(image, [64, 64])  
-
-                
-            return image, label
+        
 
         #self.dataset = self.dataset.map(augment)
         
@@ -81,7 +89,7 @@ class AnimalNetwork:
         #Flatten -> cque convierte data de 2D (como una foto de mxn dimensiones) en un arreglo 1D, osea q toda el valor de cada pixel y lo pone en un arreglo que puede usar de input para la red neuronal
         self.model = tf.keras.Sequential([
           
-            tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(96,96,3)),
+            tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1), input_shape=(64,64,3)),
             tf.keras.layers.BatchNormalization(),
             tf.keras.layers.Conv2D(32, (3,3),padding = 'same',  activation=tf.keras.layers.LeakyReLU(alpha=0.1)),
             tf.keras.layers.BatchNormalization(),
@@ -115,8 +123,7 @@ class AnimalNetwork:
             tf.keras.layers.Dropout(0.3),
             tf.keras.layers.Dense(10, activation='softmax')  
           
-            ])
-        
+        ])
         
         #compilacion con funciones de perdida, optimizador y metrica de accuracy
        
@@ -127,9 +134,9 @@ class AnimalNetwork:
         
         history = self.model.fit(
             self.dataset,
-            epochs = 15, 
-            #steps_per_epoch=5000,     
-            callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=5, verbose=1)]
+            epochs = 30, 
+            batch_size=64,
+            callbacks=[tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', factor=0.1, patience=3, verbose=1)],
         )
 
         #guardado de la red
@@ -161,7 +168,7 @@ class AnimalNetwork:
                 print("img")
                 print(img)
                 img_array = tf.keras.preprocessing.image.img_to_array(img)
-                img_array = tf.cast(img_array, tf.uint8)
+            
     
                 # Normalize the image to [0, 1]
                 img_array = np.expand_dims(img_array, axis=0)  

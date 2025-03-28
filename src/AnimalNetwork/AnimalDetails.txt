@@ -97,3 +97,4 @@ habitat=Trees and underground burrows
 diet=Omnivore (nuts, fruits, fungi, insects)
 life_span=6-12 years in the wild
 fun_fact=Squirrels can rotate their back feet 180 degrees to descend from trees.
+---
