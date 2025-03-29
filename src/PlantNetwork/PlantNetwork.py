@@ -39,13 +39,62 @@ class PlantNetwork:
         
         # Imprime la información del planta
         if planta:
-            print(f"Información sobre la {nombre}:")
-            print("Nombre Científico:", planta['nombre_cientifico'])
-            print("Descripción:", planta['descripcion'])
-            print("Ubicación:", planta['ubicacion'])
-            print("Origen:", planta['origen'])
-            print("Familia:", planta['familia'])
-            print("Datos Curiosos:", planta['curiosidades'])
+            # Crear una nueva ventana de resultados
+            result_window = tk.Tk()
+            result_window.title(f"Información sobre la {nombre}")
+            result_window.geometry("800x670")
+
+            # Mostrar la información de la planta
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+            
+            label = tk.Label(result_window, text="Nombre Científico", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['nombre_cientifico']}", font=("Helvetica", 12))
+            label.pack(pady=10)
+            
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+            
+            label = tk.Label(result_window, text="Descripción", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['descripcion']}", font=("Helvetica", 12), wraplength=600)
+            label.pack(pady=10)
+            
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="Ubicación", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['ubicacion']}", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="Origen", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['origen']}", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="Familia", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['familia']}", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="----------------------------------------------", font=("Helvetica", 12))
+            label.pack(pady=10)
+
+            label = tk.Label(result_window, text="Datos Curiosos", font=("Helvetica", 12, "bold"))
+            label.pack(pady=10)
+            label = tk.Label(result_window, text=f"{planta['curiosidades']}", font=("Helvetica", 12))
+            label.pack(pady=10)
+            
+            # Ejecutar la ventana de resultados
+            result_window.mainloop()
 
         else:
             print(f"{nombre} no fue encontrado en la base de datos.")
